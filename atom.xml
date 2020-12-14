@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>闲谈</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://ushell.me/"/>
+  <updated>2020-12-14T07:14:30.204Z</updated>
+  <id>https://ushell.me/</id>
+  
+  <author>
+    <name>ushell</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker环境之Crontab踩坑</title>
+    <link href="https://ushell.me/2020/03/25/Docker%E7%8E%AF%E5%A2%83%E4%B9%8BCrontab%E8%B8%A9%E5%9D%91/"/>
+    <id>https://ushell.me/2020/03/25/Docker环境之Crontab踩坑/</id>
+    <published>2020-03-24T16:00:00.000Z</published>
+    <updated>2020-12-14T07:14:30.204Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;0x1-背景&quot;&gt;&lt;a href=&quot;#0x1-背景&quot; class=&quot;headerlink&quot; title=&quot;0x1.背景&quot;&gt;&lt;/a&gt;0x1.背景&lt;/h2&gt;&lt;p&gt;业务中遇到Python镜像使用crontab执行任务不执行的情况，通过一系列定位分析后发现crontab在处
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https://ushell.me/categories/docker/"/>
+    
+    
+      <category term="docker,crontab,debian" scheme="https://ushell.me/tags/docker-crontab-debian/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP7.4的新功能FFI</title>
+    <link href="https://ushell.me/2019/12/11/php7-4%E7%9A%84%E6%96%B0%E5%8A%9F%E8%83%BDFFI/"/>
+    <id>https://ushell.me/2019/12/11/php7-4的新功能FFI/</id>
+    <published>2019-12-10T16:00:00.000Z</published>
+    <updated>2020-12-14T07:16:29.984Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;PHP在7.4版本提供一个有意思的扩展FFI(Foreign Function Interface)，使PHP可以调用C语言的函数，该扩展由PHP核心开发者Dmitry Stogov开发。其实跨语言调用已经很常见的需求，虽然看着比较怪异，更多的是一种折中实现wrapper。
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://ushell.me/categories/php/"/>
+    
+    
+      <category term="php,ffi" scheme="https://ushell.me/tags/php-ffi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SSR流量加密</title>
+    <link href="https://ushell.me/2019/09/24/SSR%E6%B5%81%E9%87%8F%E5%8A%A0%E5%AF%86/"/>
+    <id>https://ushell.me/2019/09/24/SSR流量加密/</id>
+    <published>2019-09-23T16:00:00.000Z</published>
+    <updated>2020-12-14T07:16:43.443Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;酸酸乳流浪在外，总会有坏人在酸酸乳回家的路上时常打劫她。英勇的你应该如何保护你家可爱的酸酸乳呢？纵观魔法世界，无外乎加密或混淆。混淆算是道高一尺，魔高一丈；还是魔高一尺，道高一丈呢？真真假假倒不如挖条专门的路让酸酸乳可以愉快的玩耍，这里使用spiped方案来实现。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="network" scheme="https://ushell.me/categories/network/"/>
+    
+    
+      <category term="ssr, spipe, GFW" scheme="https://ushell.me/tags/ssr-spipe-GFW/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hammerspoon提高生产力</title>
+    <link href="https://ushell.me/2019/09/08/hammerspoon%E6%8F%90%E9%AB%98%E7%94%9F%E4%BA%A7%E5%8A%9B/"/>
+    <id>https://ushell.me/2019/09/08/hammerspoon提高生产力/</id>
+    <published>2019-09-07T16:00:00.000Z</published>
+    <updated>2020-12-14T07:17:02.507Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;hammerspoon是MacOS系统下一款实现自动化的工具，通过lua脚本扩展系统功能。相比其他通过python脚本，nodejs脚本或原生的automator, hammerspoon更加简单，提示框界面美观。也可以使用python和pync库实现监控通知，nodejs
+      
+    
+    </summary>
+    
+      <category term="tools" scheme="https://ushell.me/categories/tools/"/>
+    
+    
+      <category term="hammerspoon, osx, 自动化" scheme="https://ushell.me/tags/hammerspoon-osx-%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LDAP配置TLS加密通信</title>
+    <link href="https://ushell.me/2019/08/27/LDAP%E9%85%8D%E7%BD%AETLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1/"/>
+    <id>https://ushell.me/2019/08/27/LDAP配置TLS加密通信/</id>
+    <published>2019-08-26T16:00:00.000Z</published>
+    <updated>2020-12-14T07:16:14.128Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;LDAP在企业开发中常用的一种协议，实现企业账户统一管理的方案。常用的LDAP开源方案主要是openldap, Debian系列和CentOS系统都会自带，但需要注意配置文件不同。在基于LDAP开发相关功能时，由于LDAP协议属于明文协议，业务对安全性要求较高的场合需要搭配
+      
+    
+    </summary>
+    
+      <category term="network" scheme="https://ushell.me/categories/network/"/>
+    
+    
+      <category term="ldap, tls" scheme="https://ushell.me/tags/ldap-tls/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用TLS加密通信数据</title>
+    <link href="https://ushell.me/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/"/>
+    <id>https://ushell.me/2019/08/23/使用TLS加密通信数据/</id>
+    <published>2019-08-22T16:00:00.000Z</published>
+    <updated>2020-12-14T07:14:02.836Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;随着某些业务安全性要求提高，敏感数据经过网络时需要加密传输。如MySQL, Redis这些协议在网络中传输是可以通过抓包分析到数据包内部信息的。&lt;/p&gt;
+&lt;p&gt;本文只是简单记录使用TLS加密某些软件数据流使用，本质上无论spiped还是stunnel都是通过建立隧道的方式进
+      
+    
+    </summary>
+    
+      <category term="network" scheme="https://ushell.me/categories/network/"/>
+    
+    
+      <category term="tls, spiped, stunnel" scheme="https://ushell.me/tags/tls-spiped-stunnel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>outline部署实践</title>
+    <link href="https://ushell.me/2019/08/02/outline%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/"/>
+    <id>https://ushell.me/2019/08/02/outline部署实践/</id>
+    <published>2019-08-01T16:00:00.000Z</published>
+    <updated>2020-12-14T07:16:25.327Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;outline是另一个爬墙的方案，主要采用docker的形式运行shadowsocks提供服务，是&lt;a href=&quot;https://github.com/Jigsaw-Code&quot;&gt;jigsaw&lt;/a&gt;团队折腾出来一个比较友好方案。outline由客户端，服务端管理和shad
+      
+    
+    </summary>
+    
+      <category term="network" scheme="https://ushell.me/categories/network/"/>
+    
+    
+      <category term="outline, 酸酸乳" scheme="https://ushell.me/tags/outline-%E9%85%B8%E9%85%B8%E4%B9%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP本地开发环境浅析</title>
+    <link href="https://ushell.me/2019/07/07/PHP%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%B5%85%E6%9E%90/"/>
+    <id>https://ushell.me/2019/07/07/PHP本地开发环境浅析/</id>
+    <published>2019-07-07T08:58:36.000Z</published>
+    <updated>2020-12-14T07:16:37.056Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;PHP生态发展十几年了，目前依旧在业务开发语言中占一席之地。大部分公司业务开发都会要求统一开发风格，以便业务更好的迭代重构。PHP由于是解释性语言，前期开发环境配置简单；依赖的扩展及三方服务并不复杂，但随着业务的发展，引入的三方服务不断迭代更新就会造成开发人员的环境不统一，
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://ushell.me/categories/php/"/>
+    
+    
+      <category term="PHP, phpbrew, laradock" scheme="https://ushell.me/tags/PHP-phpbrew-laradock/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>composer加速</title>
+    <link href="https://ushell.me/2019/07/07/composer%E5%8A%A0%E9%80%9F/"/>
+    <id>https://ushell.me/2019/07/07/composer加速/</id>
+    <published>2019-07-07T08:00:51.000Z</published>
+    <updated>2020-12-14T07:18:42.323Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;composer是PHP项目包管理利器，由于墙的原因导致包下载速度缓慢；composer全量镜像主要有phpcomposer、&lt;del&gt;laravel-china&lt;/del&gt;和新开放的阿里云。阿里云最近开放composer镜像仓库，大大减少包下载的速度。笔者推荐阿里云+pr
+      
+    
+    </summary>
+    
+      <category term="tools" scheme="https://ushell.me/categories/tools/"/>
+    
+    
+      <category term="composer, prestissimo" scheme="https://ushell.me/tags/composer-prestissimo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>laravel自定义认证</title>
+    <link href="https://ushell.me/2019/06/02/laravel%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%A4%E8%AF%81/"/>
+    <id>https://ushell.me/2019/06/02/laravel自定义认证/</id>
+    <published>2019-06-01T16:00:00.000Z</published>
+    <updated>2020-12-14T07:18:17.882Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;laravel自带用户认证基本满足简单业务需求，如果要开发API接口则需要引入jwt认证组件。jwt组件的配置参考&lt;a href=&quot;https://learnku.com/articles/10885/full-use-of-jwt&quot;&gt;JWT 完整使用详解&lt;/a&gt;, 本文主
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://ushell.me/categories/php/"/>
+    
+    
+      <category term="laravel, jwt, laravel-permission" scheme="https://ushell.me/tags/laravel-jwt-laravel-permission/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>microtime毫秒时间戳陷阱</title>
+    <link href="https://ushell.me/2019/05/30/microtime%E6%AF%AB%E7%A7%92%E6%97%B6%E9%97%B4%E6%88%B3%E9%99%B7%E9%98%B1/"/>
+    <id>https://ushell.me/2019/05/30/microtime毫秒时间戳陷阱/</id>
+    <published>2019-05-30T06:48:48.000Z</published>
+    <updated>2020-12-14T07:16:19.321Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;毫秒时间戳是API开发过程中使用的一种时间格式，PHP语言通过microtime函数获取机器的时间戳；microtime函数底层依赖C语言的gettimeofday函数获取数据。毫秒时间戳是一个13位长度的整型数据。由于PHP语言特性，mictotime毫秒部分长度不固定，
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://ushell.me/categories/php/"/>
+    
+    
+      <category term="microtime, 毫秒时间戳, php" scheme="https://ushell.me/tags/microtime-%E6%AF%AB%E7%A7%92%E6%97%B6%E9%97%B4%E6%88%B3-php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gitlab配置CAS认证</title>
+    <link href="https://ushell.me/2019/05/26/Gitlab%E9%85%8D%E7%BD%AECAS%E8%AE%A4%E8%AF%81/"/>
+    <id>https://ushell.me/2019/05/26/Gitlab配置CAS认证/</id>
+    <published>2019-05-25T16:00:36.000Z</published>
+    <updated>2020-12-14T07:14:41.935Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Gitlab采用Omniauth框架支持多种认证方式, 在开发SSO系统过程中笔者采用CAS认证的方式打通Gitlab系统与SSO. 采用CAS协议认证需要了解CAS协议交互过程及接口对应的数据结构，可参考上一篇文章&lt;a href=&quot;https://ushell.me/20
+      
+    
+    </summary>
+    
+      <category term="gitlab" scheme="https://ushell.me/categories/gitlab/"/>
+    
+    
+      <category term="Gitlab, CAS, SSO" scheme="https://ushell.me/tags/Gitlab-CAS-SSO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CAS协议</title>
+    <link href="https://ushell.me/2019/05/25/CAS%E5%8D%8F%E8%AE%AE/"/>
+    <id>https://ushell.me/2019/05/25/CAS协议/</id>
+    <published>2019-05-25T11:41:19.000Z</published>
+    <updated>2020-12-14T07:17:24.084Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CAS全称是中心认证服务(Central Authentication Service), 是SSO服务中一种认证协议, 目前有三个版本1.0, 2.0, 3.0&lt;/p&gt;
+&lt;h2 id=&quot;CAS认证流程&quot;&gt;&lt;a href=&quot;#CAS认证流程&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+      <category term="protocol" scheme="https://ushell.me/categories/protocol/"/>
+    
+    
+      <category term="CAS, SSO" scheme="https://ushell.me/tags/CAS-SSO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>How SQLi ATTACK</title>
+    <link href="https://ushell.me/2018/01/21/How-SQLi-ATTACK/"/>
+    <id>https://ushell.me/2018/01/21/How-SQLi-ATTACK/</id>
+    <published>2018-01-21T08:31:18.000Z</published>
+    <updated>2020-12-14T07:15:43.780Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;  SQL语言是实现数据库操作的一种编程语言，数据库解析器通过解析SQL实现对数据的增删改查等操作。目前主流数据库有MySQL、Oracle、MSSQL、Postgresql、MongoDB等等。Web架构采用脚本语言+数据库的形式构建服务，SQLi就出现在脚本语言逻辑处理
+      
+    
+    </summary>
+    
+      <category term="security" scheme="https://ushell.me/categories/security/"/>
+    
+    
+      <category term="SQLi" scheme="https://ushell.me/tags/SQLi/"/>
+    
+  </entry>
+  
+</feed>
