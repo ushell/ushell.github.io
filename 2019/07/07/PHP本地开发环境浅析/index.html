@@ -326,7 +326,9 @@
 <p>笔者总结下目前PHP本地开放环境趋势，大致有三类</p>
 <h2 id="集成环境"><a href="#集成环境" class="headerlink" title="#集成环境"></a>#集成环境</h2><p>开发使用诸如phpstudy、xampp、mamp等集成环境，这些集成环境基本上满足PHP开发日常。这类集成环境在统一配置PHP扩展比较麻烦，尤其涉及windows环境扩展更加繁琐。</p>
 <h2 id="phpbrew自由式"><a href="#phpbrew自由式" class="headerlink" title="#phpbrew自由式"></a>#phpbrew自由式</h2><p>phpbrew是一个PHP多版本包管理软件，支持多版本，自由配置扩展等便捷操作。笔者比较推荐使用这种方式开发PHP项目，phpbrew在mac/linux环境使用基本满足需求，windows开发环境配置phpbrew比较麻烦一些。微软这几年推进windows shell环境的使用，相信过几年三端开发环境差异性会逐渐缩小。</p>
-<p>示例:<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装特定版本</span></span><br><span class="line"><span class="attribute">phpbrew</span> install <span class="number">7</span>.<span class="number">3</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置PHP版本</span></span><br><span class="line"><span class="attribute">phpbrew</span> use <span class="number">7</span>.<span class="number">3</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#扩展安装</span></span><br><span class="line"><span class="attribute">phpbrew</span>  ext install ldap</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭phpbrew</span></span><br><span class="line"><span class="attribute">phpbrew</span> <span class="literal">off</span></span><br></pre></td></tr></table></figure></p>
+<p>示例:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装特定版本</span></span><br><span class="line"><span class="attribute">phpbrew</span> install <span class="number">7</span>.<span class="number">3</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置PHP版本</span></span><br><span class="line"><span class="attribute">phpbrew</span> use <span class="number">7</span>.<span class="number">3</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#扩展安装</span></span><br><span class="line"><span class="attribute">phpbrew</span>  ext install ldap</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭phpbrew</span></span><br><span class="line"><span class="attribute">phpbrew</span> <span class="literal">off</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="Laravel-homestead"><a href="#Laravel-homestead" class="headerlink" title="#Laravel homestead"></a>#Laravel homestead</h2><p>laravel homestead是laravel官方出品的开发环境方案，通过vagrant加载配置文件初始化PHP项目所需要的环境。vagrant使用virtualbox等虚拟机方式加载laravel/homestead box镜像的方式统一项目中研发人员的开发环境，该方案属于笨重的方式。box镜像文件比较大、需要配置homestead.yaml和需要安装virtualbox没有那么灵活。企业级开发可以使用该方案，不过homestead支持其他框架么，如Yii2/Symfony/CI？</p>
 <h2 id="Docker化"><a href="#Docker化" class="headerlink" title="#Docker化"></a>#Docker化</h2><p>一切服务皆可docker？随着微服务化、k8s和云上服务等技术兴起，docker这个容器也随之成了研发人员常常讨论的话题。docker优点主要在于容器化、隔离型、易于管理和轻便性为主。PHP在docker的生态环静发展也不错，主流镜像基本都有。<br>PHP这里采用docker主要存在两个方面：一是docker构建业务代码；二是docker构建本地开发的环境。前者通过gitlab中的ci脚本统一构建代码运行环境，便于运维管理发布回滚等操作。后者主要是便于开发人员本地搭建环境节省<strong>大量时间</strong>。很多时候只是验证某些服务的场景，手动搭建环境会遇到很多问题；手动搭建唯一好处就是可以非常了解系统的运行及系统的官方手册 :)</p>
 <p>laradock是PHP集成环境docker化一个方案，通过内置开发环境所需的dockerfile文件进行自动构建；该项目目前github拥有星星7k+的状态，仓库内置许多服务的dockerfile可以用来学习某些服务dockerfile写法，推荐学习下</p>
@@ -543,6 +545,19 @@
       
     
   </footer>
+  
+    <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95e6ce183401589a50bec1b83a9d2ae0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+  
+          console.log("95e6ce183401589a50bec1b83a9d2ae0")
+    </script>
+  
 
 
       <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>

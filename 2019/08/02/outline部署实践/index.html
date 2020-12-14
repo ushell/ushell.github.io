@@ -352,6 +352,7 @@
 </li>
 <li><p>outline server配置文件(docker容器)</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">应用目录: </span><br><span class="line">	<span class="regexp">/root/</span>shadowbox</span><br><span class="line">	<span class="regexp">/root/</span>shadowbox<span class="regexp">/bin/</span>outline-ss-server</span><br><span class="line">	<span class="regexp">/root/</span>shadowbox<span class="regexp">/bin/</span>prometheus</span><br><span class="line"></span><br><span class="line">配置目录:</span><br><span class="line">	<span class="regexp">/opt/</span>outline</span><br><span class="line">	<span class="regexp">/opt/</span>outline<span class="regexp">/persisted-state/</span>shadowbox_config.json</span><br><span class="line">	<span class="regexp">/opt/</span>outline<span class="regexp">/persisted-state/</span>shadowbox_server_config.json</span><br><span class="line">	<span class="regexp">/opt/</span>outline<span class="regexp">/persisted-state/</span>outline-ss-server/config.yml</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="0x2-项目分析"><a href="#0x2-项目分析" class="headerlink" title="0x2 项目分析"></a>0x2 项目分析</h2><p> outline这个项目前身是<a target="_blank" rel="noopener" href="https://github.com/uProxy">uProxy</a>, outline项目主要分为outline-client、outline-server和outline-ss-server三个工程。outline-client采用electron和typescript开发客户端，移动端配置相对简单，github上有iOS客户端<strong>ipa</strong>文件。outline-ss-server工程使用golang重新实现shadowsocks功能，相对<a target="_blank" rel="noopener" href="https://github.com/shadowsocks/go-shadowsocks2">go-shadowsocks2</a>多了端口复用和监控上报功能，更多详情参考<a target="_blank" rel="noopener" href="https://github.com/Jigsaw-Code/outline-ss-server">官方说明</a>。</p>
@@ -366,7 +367,9 @@
 </li>
 <li><p>sentry_webhook</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">日志服务上报，利用Google cloud function功能配合https://sentry.io/outlinevpn平台上报数据</span><br></pre></td></tr></table></figure></li>
-<li>metrics_server<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元数据上报，利用Google cloud function功能实现数据上报。outline-server可以设置上报数据开关。具体参考shadowbox_server_config.json配置文件。如果Docker环境变量未设置SB_METRICS_URL值，系统默认上报地址是https://metrics-prod.uproxy.org, 无法通过outline-server修改上报地址。数据上报也是outline被诟病的地方。</span><br></pre></td></tr></table></figure>
+<li><p>metrics_server</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元数据上报，利用Google cloud function功能实现数据上报。outline-server可以设置上报数据开关。具体参考shadowbox_server_config.json配置文件。如果Docker环境变量未设置SB_METRICS_URL值，系统默认上报地址是https://metrics-prod.uproxy.org, 无法通过outline-server修改上报地址。数据上报也是outline被诟病的地方。</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>outline的优势在于整体配置简单，有自成一体的客户端全家桶，使用方便。从本质上来说，都只是在shadowsocks上套了一层壳而已。</p>
@@ -587,6 +590,19 @@
       
     
   </footer>
+  
+    <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95e6ce183401589a50bec1b83a9d2ae0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+  
+          console.log("95e6ce183401589a50bec1b83a9d2ae0")
+    </script>
+  
 
 
       <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>

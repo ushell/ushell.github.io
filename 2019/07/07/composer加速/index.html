@@ -326,9 +326,11 @@
 <p>腾讯云也跟随阿里的脚步开放composer全量镜像仓库, <a target="_blank" rel="noopener" href="https://mirrors.cloud.tencent.com/help/composer.html">官网配置</a>, 阿里的composer偶尔也会抽筋，可能与本地网络有关 :)</p>
 <p>laravel-china全量镜像仓库将会在两个月左右关闭，具体移步<a target="_blank" rel="noopener" href="https://learnku.com/articles/30758">阅读</a>。</p>
 <h2 id="阿里云composer配置"><a href="#阿里云composer配置" class="headerlink" title="#阿里云composer配置"></a>#阿里云composer配置</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">全局安装(推荐): composer config -g repo.packagist composer https:<span class="regexp">//mi</span>rrors.aliyun.com<span class="regexp">/composer/</span></span><br><span class="line"></span><br><span class="line">取消配置: composer config -g --unset repos.packagist</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>这里使用composer下载包时使用-vvv参数显示进度详情，能有有一个直观的体现。</p>
 <h2 id="prestissimo并发加速"><a href="#prestissimo并发加速" class="headerlink" title="#prestissimo并发加速"></a>#prestissimo并发加速</h2><p>prestissimo是一个并发下载的composer插件，通过使用curl_multi*系列方法并发请求包，一定程度节约时间。</p>
 <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">安装: composer <span class="keyword">global</span> <span class="keyword">require</span> hirak/prestissimo</span><br><span class="line">卸载: composer <span class="keyword">global</span> <span class="keyword">remove</span> hirak/prestissimo</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="#参考:"></a>#参考:</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://github.com/hirak/prestissimo">prestissimo仓库</a></li>
 <li><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/composer">阿里云Composer全量镜像</a></li>
@@ -545,6 +547,19 @@
       
     
   </footer>
+  
+    <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95e6ce183401589a50bec1b83a9d2ae0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+  
+          console.log("95e6ce183401589a50bec1b83a9d2ae0")
+    </script>
+  
 
 
       <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>

@@ -344,6 +344,7 @@
 <ul>
 <li>基础使用<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建角色、权限</span></span><br><span class="line"><span class="variable">$role</span> = Role::create([<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;admin&#x27;</span>]);</span><br><span class="line"><span class="variable">$permissions</span> = [</span><br><span class="line">    Permission::create([<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;user-manage&#x27;</span>]),</span><br><span class="line">    Permission::create([<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;role-manage&#x27;</span>]),</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="variable">$role</span>-&gt;syncPermissions(<span class="variable">$permissions</span>);</span><br></pre></td></tr></table></figure></li>
 <li>API限制<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#路由配置</span></span><br><span class="line">Route::group([<span class="string">&#x27;middleware&#x27;</span> =&gt; <span class="string">&#x27;role:admin&#x27;</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">#User类实现判断方法(App\User.php)</span></span><br><span class="line"><span class="comment">#该方法需要单独添加, v5.8版本中没有hasAnyRole该方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasAnyRole</span>(<span class="params"><span class="variable">$roles</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$user</span> = <span class="keyword">$this</span>-&gt;getAttribute(<span class="string">&#x27;attributes&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$roles</span> <span class="keyword">as</span> <span class="variable">$role</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$role</span> !== <span class="variable">$user</span>[<span class="string">&#x27;roles&#x27;</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="0x3-总结"><a href="#0x3-总结" class="headerlink" title="0x3 总结"></a>0x3 总结</h2><p>laravel的生态系统丰富，各种各样组件都存在；使用不同的组件排列组合实现不同的功能，虽然laravel号称最优雅的框架，但是内部逻辑复杂难懂。</p>
@@ -559,6 +560,19 @@
       
     
   </footer>
+  
+    <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95e6ce183401589a50bec1b83a9d2ae0";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+  
+          console.log("95e6ce183401589a50bec1b83a9d2ae0")
+    </script>
+  
 
 
       <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
