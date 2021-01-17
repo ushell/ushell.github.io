@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>synergy多主机共享键鼠</title>
+      <link href="2021/01/17/synergy%E5%A4%9A%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E9%94%AE%E9%BC%A0/"/>
+      <url>2021/01/17/synergy%E5%A4%9A%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E9%94%AE%E9%BC%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>家里有台破旧的笔记本，为了让它继续发光发热，打算安装Debian系统配置开发环境；十年前的笔记本改装后依然可以开发诸如PHP或python之类不需要编译的项目。笔者的工作本是mbp, 两台笔记本开发时总是来回切换鼠标键盘比较麻烦，因此需要通过mbp操作旧版笔记本。</p><p>synergy是一个跨平台软件，可以通过一套键鼠操作多个不同系统主机的软件；同类型的还有微软推出的<a href="https://answers.microsoft.com/en-us/windows/forum/windows_10-start/mouse-without-borders-mousewithoutborders/0523308d-3406-4273-b86e-bef28aa6b50d?page=6"><code>无界</code></a>软件，不过该软件仅限Windows平台操作。</p><p>synergy分为收费版和开源版本，开源版本是命令行操作（无GUI），满足基本操作。</p><h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><ul><li><p>下载源码</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/symless/synergy-core.git</span><br><span class="line"></span><br><span class="line">cd synergy-core</span><br><span class="line"></span><br><span class="line">git checkout v2.0.0-stable</span><br></pre></td></tr></table></figure></li><li><p>配置编译(MacOS)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 依赖qt, 如果没有安装可以brew install qt</span><br><span class="line">// 查看qt安装目录</span><br><span class="line">brew info qt </span><br><span class="line"></span><br><span class="line">// 设置Cmake环境变量</span><br><span class="line">export CMAKE_PREFIX_PATH=&quot;/usr/local/Cellar/qt/5.15.0/Frameworks/&quot;</span><br><span class="line"></span><br><span class="line">// 设置构建make文件目录</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line">// 注意big sur版本的sdk版本是11.0.sdk</span><br><span class="line">cmake -DCMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk  -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DCMAKE_OSX_ARCHITECTURES=x86_64 ..</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">// make成功后生成三个二进制文件，其中synergy-core是核心文件，其他两个是旧版本程序</span><br><span class="line">synergy-core </span><br><span class="line">synergyc</span><br><span class="line">synergys</span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li><p>配置编译(Debian)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/symless/synergy-core.git</span><br><span class="line">cd synergy-core</span><br><span class="line">git checkout v2.0.0-stable</span><br><span class="line"></span><br><span class="line">mkdir build</span><br><span class="line">// Debian8版本的cmake需要升级</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure></li><li><p>synergy配置示例</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">server.conf</span></span><br><span class="line"><span class="string">//</span> <span class="string">配置参考:</span> <span class="string">https://github.com/symless/synergy-core/wiki/Text-Config</span></span><br><span class="line"><span class="comment"># sample synergy configuration file</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># comments begin with the # character and continue to the end of</span></span><br><span class="line"><span class="comment"># line.  comments may appear anywhere the syntax permits.</span></span><br><span class="line"><span class="comment"># +----------+  +---------+ +---------+</span></span><br><span class="line"><span class="comment"># | mac-mini |  | macbook | | windows |</span></span><br><span class="line"><span class="comment"># |          |  |         | |         |</span></span><br><span class="line"><span class="comment"># +----------+  +---------+ +---------+</span></span><br><span class="line"></span><br><span class="line"><span class="attr">section:</span> <span class="string">screens</span></span><br><span class="line">    <span class="comment"># three hosts named:  mac-mini, macbook, and windows</span></span><br><span class="line">    <span class="comment"># These are the nice names of the hosts to make it easy to write the config file</span></span><br><span class="line">    <span class="comment"># The aliases section below contain the &quot;actual&quot; names of the hosts (their hostnames)</span></span><br><span class="line">    <span class="attr">debian:</span></span><br><span class="line">    <span class="attr">macbook:</span></span><br><span class="line">    <span class="attr">windows:</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"></span><br><span class="line"><span class="attr">section:</span> <span class="string">links</span></span><br><span class="line">    <span class="comment"># windows is to the right of macbook</span></span><br><span class="line">    <span class="comment"># mac-mini is to the left of macbook</span></span><br><span class="line">    <span class="attr">macbook:</span></span><br><span class="line">        <span class="string">right(0,100)</span> <span class="string">=</span> <span class="string">windows</span> <span class="comment"># the numbers in parentheses indicate the percentage of the screen&#x27;s edge to be considered active for switching)</span></span><br><span class="line">        <span class="string">left</span>  <span class="string">=</span> <span class="string">debian</span></span><br><span class="line">        <span class="comment"># shift = shift (shift, alt, super, meta can be mapped to any of the others)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># macbook is to the right of mac-mini</span></span><br><span class="line">    <span class="attr">debian:</span></span><br><span class="line">        <span class="string">right</span> <span class="string">=</span> <span class="string">macbook</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># macbook is to the left of windows</span></span><br><span class="line">    <span class="attr">windows:</span></span><br><span class="line">        <span class="string">left</span>  <span class="string">=</span> <span class="string">macbook</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"></span><br><span class="line"><span class="attr">section:</span> <span class="string">aliases</span></span><br><span class="line">    <span class="comment"># The &quot;real&quot; name of windows is John-Smiths-windows-3.local. </span></span><br><span class="line">    <span class="comment"># If we wanted we could remove this alias and instead use John-Smiths-windows-3.local everywhere windows is above. </span></span><br><span class="line">    <span class="comment"># Hopefully it should be easy to see why using an alias is nicer</span></span><br><span class="line">    <span class="attr">macbook:</span></span><br><span class="line">        <span class="string">mbp</span></span><br><span class="line">    <span class="attr">debian:</span></span><br><span class="line">        <span class="string">debian.local</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"></span><br><span class="line"><span class="attr">section:</span> <span class="string">options</span></span><br><span class="line">    <span class="string">switchDelay</span> <span class="string">=</span> <span class="number">400</span>   <span class="comment"># 鼠标滑到边缘时，提留多久才能切换屏幕</span></span><br><span class="line">    <span class="string">clipboardSharing</span> <span class="string">=</span> <span class="literal">true</span> <span class="comment"># 共享剪切板</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure></li></ul><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>笔者采用mbp作为服务端控制Debian系统操作，需要注意的是mac环境运行软件需要设置给iterm配置权限(iterm终端执行synergy)</p><p>未配置权限报错:</p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error </span>failed to create quartz event tap</span><br></pre></td></tr></table></figure><p>mac环境权限配置: 系统偏好设置 -&gt; 安全性与隐私 -&gt; 辅助功能 -&gt; iterm.app允许</p><ul><li>服务端(mbp)<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> address参数代表服务端主机IP地址</span><br><span class="line">sudo <span class="string">./synergy-core</span> <span class="params">--server</span> <span class="params">--address</span> 192.168.1.100 <span class="params">--no-daemon</span> <span class="params">--name</span> macbook <span class="params">--config</span> <span class="string">./server.conf</span></span><br></pre></td></tr></table></figure></li><li>客户端(Debian)<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="string">./synergy-core</span> <span class="params">--client</span> <span class="params">--no-daemon</span> <span class="params">--name</span> debian 192.168.1.100</span><br></pre></td></tr></table></figure></li></ul><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>操作mbp的触摸板移动到屏幕外时会进入到Debian系统屏幕中，同一局域网中操作流畅，没有卡顿现象。</p><p>如果Debian为server端操作mbp时会导致鼠标移动到mbp屏幕时点击无效情况。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、[Synergy-core编译使用教程] <a href="https://segmentfault.com/a/1190000023512582">https://segmentfault.com/a/1190000023512582</a></p><p>2、[synergy文档] <a href="https://github.com/symless/synergy-core/wiki/Compiling">https://github.com/symless/synergy-core/wiki/Compiling</a></p><p>3、[cmake官网] <a href="https://cmake.org/download/">https://cmake.org/download/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> synergy </tag>
+            
+            <tag> 共享键鼠 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker环境之Crontab踩坑</title>
       <link href="2020/03/25/Docker%E7%8E%AF%E5%A2%83%E4%B9%8BCrontab%E8%B8%A9%E5%9D%91/"/>
       <url>2020/03/25/Docker%E7%8E%AF%E5%A2%83%E4%B9%8BCrontab%E8%B8%A9%E5%9D%91/</url>
@@ -20,7 +47,11 @@
       
         <tags>
             
-            <tag> docker,crontab,debian </tag>
+            <tag> docker </tag>
+            
+            <tag> crontab </tag>
+            
+            <tag> debian </tag>
             
         </tags>
       
@@ -45,7 +76,7 @@
       
         <tags>
             
-            <tag> php,ffi </tag>
+            <tag> ffi </tag>
             
         </tags>
       
@@ -70,7 +101,9 @@
       
         <tags>
             
-            <tag> ssr, spipe, GFW </tag>
+            <tag> ssr </tag>
+            
+            <tag> spipe </tag>
             
         </tags>
       
@@ -95,7 +128,9 @@
       
         <tags>
             
-            <tag> hammerspoon, osx, 自动化 </tag>
+            <tag> hammerspoon </tag>
+            
+            <tag> 自动化 </tag>
             
         </tags>
       
@@ -120,7 +155,9 @@
       
         <tags>
             
-            <tag> ldap, tls </tag>
+            <tag> ldap </tag>
+            
+            <tag> tls </tag>
             
         </tags>
       
@@ -145,7 +182,11 @@
       
         <tags>
             
-            <tag> tls, spiped, stunnel </tag>
+            <tag> tls </tag>
+            
+            <tag> spiped </tag>
+            
+            <tag> stunnel </tag>
             
         </tags>
       
@@ -170,7 +211,9 @@
       
         <tags>
             
-            <tag> outline, 酸酸乳 </tag>
+            <tag> outline </tag>
+            
+            <tag> 酸酸乳 </tag>
             
         </tags>
       
@@ -195,7 +238,9 @@
       
         <tags>
             
-            <tag> PHP, phpbrew, laradock </tag>
+            <tag> phpbrew </tag>
+            
+            <tag> laradock </tag>
             
         </tags>
       
@@ -220,7 +265,9 @@
       
         <tags>
             
-            <tag> composer, prestissimo </tag>
+            <tag> composer </tag>
+            
+            <tag> prestissimo </tag>
             
         </tags>
       
@@ -245,7 +292,11 @@
       
         <tags>
             
-            <tag> laravel, jwt, laravel-permission </tag>
+            <tag> laravel </tag>
+            
+            <tag> jwt </tag>
+            
+            <tag> laravel-permission </tag>
             
         </tags>
       
@@ -270,7 +321,7 @@
       
         <tags>
             
-            <tag> microtime, 毫秒时间戳, php </tag>
+            <tag> microtime </tag>
             
         </tags>
       
@@ -295,7 +346,11 @@
       
         <tags>
             
-            <tag> Gitlab, CAS, SSO </tag>
+            <tag> cas </tag>
+            
+            <tag> sso </tag>
+            
+            <tag> gitlab </tag>
             
         </tags>
       
@@ -320,7 +375,9 @@
       
         <tags>
             
-            <tag> CAS, SSO </tag>
+            <tag> cas </tag>
+            
+            <tag> sso </tag>
             
         </tags>
       
@@ -345,7 +402,7 @@
       
         <tags>
             
-            <tag> SQLi </tag>
+            <tag> sqli </tag>
             
         </tags>
       
