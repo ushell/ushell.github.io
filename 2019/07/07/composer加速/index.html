@@ -21,7 +21,7 @@
   
   <title>composer加速 - 闲谈</title>
   
-    <meta name="keywords" content="composer,prestissimo">
+    <meta name="keywords" content="composer,prestissimo,composer2">
   
 
   
@@ -311,7 +311,14 @@
 
 
   
-  <p>composer是PHP项目包管理利器，由于墙的原因导致包下载速度缓慢；composer全量镜像主要有phpcomposer、<del>laravel-china</del>和新开放的阿里云。阿里云最近开放composer镜像仓库，大大减少包下载的速度。笔者推荐阿里云+prestissimo组合方式。</p>
+  <p>composer官方在<code>2020-10-24</code>发布composer2，包处理能力整体提升不少；同时<code>prestissimo</code>项目推荐使用composer2, 并且支持范围限定在2.0以下版本。官方博客中提到composer2.x虽然支持<code>PHP5.6</code>等低版本，后续composer2.x版本会要求PHP在<code>7.0</code>以上主流版本；推荐升级PHP版本，毕竟<code>PHP8</code>都出来了。</p>
+<p>composer2升级:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer self-update --2</span><br></pre></td></tr></table></figure>
+
+<p>composer2新增<code>runtime</code>特性，其中<code>plaform check</code>功能会检查当前PHP版本，如果PHP版本符合包的要求会报错，具体特性参考<a target="_blank" rel="noopener" href="https://blog.packagist.com/composer-2-0-is-now-available/">官方博客</a></p>
+<p><font color="#dd0000">注意：阿里云和腾讯云composer镜像存在一定几率异常，优先使用官方镜像 </font></p>
+<hr>
+<p>composer是PHP项目包管理利器，由于墙的原因导致包下载速度缓慢；composer全量镜像主要有phpcomposer、<del>laravel-china</del>和新开放的阿里云。阿里云最近开放composer镜像仓库，大大减少包下载的速度。笔者推荐阿里云+prestissimo组合方式。</p>
 <p>腾讯云也跟随阿里的脚步开放composer全量镜像仓库, <a target="_blank" rel="noopener" href="https://mirrors.cloud.tencent.com/help/composer.html">官网配置</a>, 阿里的composer偶尔也会抽筋，可能与本地网络有关 :)</p>
 <p>laravel-china全量镜像仓库将会在两个月左右关闭，具体移步<a target="_blank" rel="noopener" href="https://learnku.com/articles/30758">阅读</a>。</p>
 <h2 id="阿里云composer配置"><a href="#阿里云composer配置" class="headerlink" title="#阿里云composer配置"></a>#阿里云composer配置</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">全局安装(推荐): composer config -g repo.packagist composer https:<span class="regexp">//mi</span>rrors.aliyun.com<span class="regexp">/composer/</span></span><br><span class="line"></span><br><span class="line">取消配置: composer config -g --unset repos.packagist</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -324,6 +331,7 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/hirak/prestissimo">prestissimo仓库</a></li>
 <li><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/composer">阿里云Composer全量镜像</a></li>
 <li><a target="_blank" rel="noopener" href="https://mirrors.cloud.tencent.com/composer/">腾讯云Composer全量镜像</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.packagist.com/composer-2-0-is-now-available/">composer2</a></li>
 </ol>
 
   
@@ -359,10 +367,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-17T16:28:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-07-07T16:00:51+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年1月17日</p>
+    <p>更新于：2019年7月7日</p>
   </a>
 </div>
 
@@ -371,7 +379,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/composer/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>composer</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/prestissimo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>prestissimo</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/composer/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>composer</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/prestissimo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>prestissimo</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/composer2/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>composer2</p></a></div>
 
 
         
