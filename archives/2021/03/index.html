@@ -21,7 +21,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>分类：network - 闲谈</title>
+  <title>归档：2021/3 - 闲谈</title>
   
 
   
@@ -58,7 +58,7 @@
 <body>
   
 
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -213,7 +213,7 @@
     <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="half" class='cover-wrapper  search' style="display: ;">
           
             <div id='cover-backstretch'></div>
           
@@ -252,23 +252,15 @@
       <div class='body-wrapper' id="pjax-container">
         
 
-
 <div class='l_main'>
-  
-    
-      
+	
+		
   <section class="post-list">
     
       
         
           
         
-          
-        
-          
-        
-          
-        
       
     
     
@@ -282,16 +274,17 @@
   
     
     <h2 class="article-title" >
-      <a href="/2019/09/24/SSR%E6%B5%81%E9%87%8F%E5%8A%A0%E5%AF%86/">
-        SSR流量加密
+      <a href="/2021/03/31/k8s%E5%AE%B9%E5%99%A8%E5%8F%82%E6%95%B0containerPort%E8%A7%A3%E6%9E%90/">
+        k8s容器参数containerPort解析
       </a>
     </h2>
   
   <div class='md'>
     
       
-        酸酸乳流浪在外，总会有坏人在酸酸乳回家的路上时常打劫她。英勇的你应该如何保护你家可爱的酸酸乳呢？纵观魔法世界，无外乎加密或混淆。混淆算是道高一尺，魔高一丈；还是魔高一尺，道高一丈呢？真真假假倒不如挖条专门的路让酸酸乳可以愉快的玩耍，这里使用spiped方案来实现。
-spiped是Tarsnap项目中的一个加密通信工具，另外还有著名的加密工具scrypt, 目前已开源到同人社区, 该工具使用A...
+        0x1、背景在梳理线上业务过程发现，Pod的配置文件中containerPort参数配置错误也能正常通信；在接触k8s时间里一直以为containerPort参数必须设置才能使容器内服务被外部访问，通过一系列实验发现containerPort这个参数有些鸡肋。
+官方解释containerPort参数:
+12345List of ports to expose from the contain...
       
     
   </div>
@@ -299,160 +292,15 @@ spiped是Tarsnap项目中的一个加密通信工具，另外还有著名的加�
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2019-09-24</time>
+        <time>2021-03-31</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
+          <a class="category-link" href="/categories/kubernetes/">kubernetes</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2019/09/24/SSR%E6%B5%81%E9%87%8F%E5%8A%A0%E5%AF%86/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2019/08/27/LDAP%E9%85%8D%E7%BD%AETLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1/">
-        LDAP配置TLS加密通信
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        LDAP在企业开发中常用的一种协议，实现企业账户统一管理的方案。常用的LDAP开源方案主要是openldap, Debian系列和CentOS系统都会自带，但需要注意配置文件不同。在基于LDAP开发相关功能时，由于LDAP协议属于明文协议，业务对安全性要求较高的场合需要搭配TLS完成对数据加密传输。LDAP默认支持TLS协议，开放的端口是636。
-0x1 基础配置openldap服务配置TL...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2019-08-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2019/08/27/LDAP%E9%85%8D%E7%BD%AETLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/">
-        使用TLS加密通信数据
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        随着某些业务安全性要求提高，敏感数据经过网络时需要加密传输。如MySQL, Redis这些协议在网络中传输是可以通过抓包分析到数据包内部信息的。
-本文只是简单记录使用TLS加密某些软件数据流使用，本质上无论spiped还是stunnel都是通过建立隧道的方式进行安全传输。spiped是Redis官方推荐一个采用AES加密算法开源工具，该工具作者是OpenBSD的安全协会成员；stunnel则...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2019-08-23</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2019/08/02/outline%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/">
-        outline部署实践
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        outline是另一个爬墙的方案，主要采用docker的形式运行shadowsocks提供服务，是jigsaw团队折腾出来一个比较友好方案。outline由客户端，服务端管理和shadowbox(加强版的ss)组成，其中客户端支持win/linux/mac/android/iOS平台。截止目前客户端发版617次, 基本满足日常划水了。
-outline优点
-
-支持全平台
-docker化部署
-兼...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2019-08-02</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2019/08/02/outline%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/'>
+          <a class='readmore' href='/2021/03/31/k8s%E5%AE%B9%E5%99%A8%E5%8F%82%E6%95%B0containerPort%E8%A7%A3%E6%9E%90/'>
             阅读全文
           </a>
         </div>
@@ -472,8 +320,7 @@ docker化部署
   
 
 
-    
-  
+	
 </div>
 <aside class='l_side'>
   
@@ -646,7 +493,7 @@ docker化部署
 
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.add("show");
+  l_header.classList.remove("show");
   
 </script>
 
