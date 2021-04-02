@@ -27,7 +27,7 @@
     
       
       
-        &lt;h2 id=&quot;0x1、背景&quot;&gt;&lt;a href=&quot;#0x1、背景&quot; class=&quot;headerlink&quot; title=&quot;0x1、背景&quot;&gt;&lt;/a&gt;0x1、背景&lt;/h2&gt;&lt;p&gt;hyperf 框架实现定时任务组件 crontab 来代替 linux 环境中的定时任务 crontab, 
+        &lt;h2 id=&quot;0x1、背景&quot;&gt;&lt;a href=&quot;#0x1、背景&quot; class=&quot;headerlink&quot; title=&quot;0x1、背景&quot;&gt;&lt;/a&gt;0x1、背景&lt;/h2&gt;&lt;p&gt;hyperf框架通过&lt;code&gt;swoole\process&lt;/code&gt;及&lt;code&gt;swoole\cor
       
     
     </summary>

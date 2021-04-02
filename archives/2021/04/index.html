@@ -282,9 +282,10 @@
   <div class='md'>
     
       
-        0x1、背景hyperf 框架实现定时任务组件 crontab 来代替 linux 环境中的定时任务 crontab, 该组件兼容 crontab 语法并支持秒级别定时任务；crontab 组件通过swoole\process及swoole\coroutine\sleep函数实现定时任务。
-本文目的侧重分析 crontab 组件如何实现多实例场景下保障任务单一执行。
-0x2、执行流程cron...
+        0x1、背景hyperf框架通过swoole\process及swoole\coroutine\sleep函数实现定时任务，代替linux环境中的crontab；该组件兼容crontab语法并支持秒级别定时任务。
+本文侧重分析crontab组件如何实现多实例场景下保障任务单一执行。
+0x2、执行流程crontab 配置解析:
+123456789101112131415161718192021...
       
     
   </div>
