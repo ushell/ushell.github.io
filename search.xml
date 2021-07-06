@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>crontab源码解析</title>
+      <link href="2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+      <url>2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>分析Linux环境中cron源码逻辑，了解定时任务实现原理。</p><p>基于busybox版本crontab</p><p><img src="/images/crontab.png" class="lazyload" data-srcset="/images/crontab.png" srcset="data:image/png;base64,666" alt="代码流程图"></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><a href="https://github.com/ushell/learncode/tree/master/crontab/busybox">crontab源码</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> crontab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>业务缓存的一致性</title>
       <link href="2021/07/05/%E4%B8%9A%E5%8A%A1%E7%BC%93%E5%AD%98%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/"/>
       <url>2021/07/05/%E4%B8%9A%E5%8A%A1%E7%BC%93%E5%AD%98%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</url>

@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -21,7 +19,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：sqli - 闲谈</title>
+  <title>crontab源码解析 - 闲谈</title>
+  
+    <meta name="keywords" content="crontab">
   
 
   
@@ -213,7 +213,7 @@
     <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -252,76 +252,181 @@
       <div class='body-wrapper' id="pjax-container">
         
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        crontab源码解析
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2018/01/21/How-SQLi-ATTACK/">
-        How SQLi ATTACK
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-          SQL语言是实现数据库操作的一种编程语言，数据库解析器通过解析SQL实现对数据的增删改查等操作。目前主流数据库有MySQL、Oracle、MSSQL、Postgresql、MongoDB等等。Web架构采用脚本语言+数据库的形式构建服务，SQLi就出现在脚本语言逻辑处理中。而SQLi(SQL Injection)攻击已经延续了十多年之久，历年占据OWASP Top10榜首。SQLi在传统...
-      
-    
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/tools/">tools</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2018-01-21</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月6日</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/security/">security</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="crontab源码解析" data-path="/2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>分析Linux环境中cron源码逻辑，了解定时任务实现原理。</p>
+<p>基于busybox版本crontab</p>
+<p><img src="/images/crontab.png" class="lazyload" data-srcset="/images/crontab.png" srcset="data:image/png;base64,666" alt="代码流程图"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ushell/learncode/tree/master/crontab/busybox">crontab源码</a></li>
+</ul>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2018/01/21/How-SQLi-ATTACK/'>
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://ushell.me/2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/>https://ushell.me/2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-06T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月6日</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/crontab/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>crontab</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/07/05/%E4%B8%9A%E5%8A%A1%E7%BC%93%E5%AD%98%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/'>
+          <p class='title'>业务缓存的一致性<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>缓存在业务场景中多用于存储数据，避免频繁调用后端数据库服务，减轻数据库压力，提高业务吞吐量；本文是笔者翻译的一篇关于如何保证在业务缓存数据的一致性
+—-译文—-
+今日Redis已经成为互联网行业...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -329,165 +434,28 @@
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">闲谈</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/c29lYXN5ZEBnbWFpbC5jb20="
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/ushell"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/ushell"
-              class="social fab fa-twitter flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/devops/" href="/categories/devops/"
-            id="categoriesdevops"
-            ><div class='name'>devops</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/docker/" href="/categories/docker/"
-            id="categoriesdocker"
-            ><div class='name'>docker</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/framework/" href="/categories/framework/"
-            id="categoriesframework"
-            ><div class='name'>framework</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/kubernetes/" href="/categories/kubernetes/"
-            id="categorieskubernetes"
-            ><div class='name'>kubernetes</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/network/" href="/categories/network/"
-            id="categoriesnetwork"
-            ><div class='name'>network</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/php/" href="/categories/php/"
-            id="categoriesphp"
-            ><div class='name'>php</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/protocol/" href="/categories/protocol/"
-            id="categoriesprotocol"
-            ><div class='name'>protocol</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/security/" href="/categories/security/"
-            id="categoriessecurity"
-            ><div class='name'>security</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/tools/" href="/categories/tools/"
-            id="categoriestools"
-            ><div class='name'>tools</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%BF%BB%E8%AF%91/" href="/categories/%E7%BF%BB%E8%AF%91/"
-            id="categoriesE7BFBBE8AF91"
-            ><div class='name'>翻译</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/cache/" style="font-size: 14px; color: #999">cache</a> <a href="/tags/cas/" style="font-size: 19px; color: #777">cas</a> <a href="/tags/composer/" style="font-size: 14px; color: #999">composer</a> <a href="/tags/composer2/" style="font-size: 14px; color: #999">composer2</a> <a href="/tags/crontab/" style="font-size: 24px; color: #555">crontab</a> <a href="/tags/debian/" style="font-size: 14px; color: #999">debian</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/ffi/" style="font-size: 14px; color: #999">ffi</a> <a href="/tags/gitlab/" style="font-size: 14px; color: #999">gitlab</a> <a href="/tags/hammerspoon/" style="font-size: 14px; color: #999">hammerspoon</a> <a href="/tags/hyperf/" style="font-size: 14px; color: #999">hyperf</a> <a href="/tags/jwt/" style="font-size: 14px; color: #999">jwt</a> <a href="/tags/kubernetes/" style="font-size: 14px; color: #999">kubernetes</a> <a href="/tags/laradock/" style="font-size: 14px; color: #999">laradock</a> <a href="/tags/laravel/" style="font-size: 14px; color: #999">laravel</a> <a href="/tags/laravel-permission/" style="font-size: 14px; color: #999">laravel-permission</a> <a href="/tags/ldap/" style="font-size: 14px; color: #999">ldap</a> <a href="/tags/microtime/" style="font-size: 14px; color: #999">microtime</a> <a href="/tags/outline/" style="font-size: 14px; color: #999">outline</a> <a href="/tags/php/" style="font-size: 14px; color: #999">php</a> <a href="/tags/phpbrew/" style="font-size: 14px; color: #999">phpbrew</a> <a href="/tags/prestissimo/" style="font-size: 14px; color: #999">prestissimo</a> <a href="/tags/spipe/" style="font-size: 14px; color: #999">spipe</a> <a href="/tags/spiped/" style="font-size: 14px; color: #999">spiped</a> <a href="/tags/sqli/" style="font-size: 14px; color: #999">sqli</a> <a href="/tags/sso/" style="font-size: 19px; color: #777">sso</a> <a href="/tags/ssr/" style="font-size: 14px; color: #999">ssr</a> <a href="/tags/stunnel/" style="font-size: 14px; color: #999">stunnel</a> <a href="/tags/synergy/" style="font-size: 14px; color: #999">synergy</a> <a href="/tags/tls/" style="font-size: 19px; color: #777">tls</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%AE%E9%BC%A0/" style="font-size: 14px; color: #999">共享键鼠</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px; color: #999">自动化</a> <a href="/tags/%E9%85%B8%E9%85%B8%E4%B9%B3/" style="font-size: 14px; color: #999">酸酸乳</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
         
@@ -497,8 +465,8 @@
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="crontab源码解析";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
 

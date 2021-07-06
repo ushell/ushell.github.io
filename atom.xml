@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ushell.me/"/>
-  <updated>2021-07-04T16:00:00.000Z</updated>
+  <updated>2021-07-05T16:00:00.000Z</updated>
   <id>https://ushell.me/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>crontab源码解析</title>
+    <link href="https://ushell.me/2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+    <id>https://ushell.me/2021/07/06/crontab源码解析/</id>
+    <published>2021-07-05T16:00:00.000Z</published>
+    <updated>2021-07-05T16:00:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;分析Linux环境中cron源码逻辑，了解定时任务实现原理。&lt;/p&gt;
+&lt;p&gt;基于busybox版本crontab&lt;/p&gt;
+&lt;p&gt;&lt;img s
+      
+    
+    </summary>
+    
+      <category term="tools" scheme="https://ushell.me/categories/tools/"/>
+    
+    
+      <category term="crontab" scheme="https://ushell.me/tags/crontab/"/>
+    
+  </entry>
   
   <entry>
     <title>业务缓存的一致性</title>
