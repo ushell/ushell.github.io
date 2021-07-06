@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ushell.me/"/>
-  <updated>2021-04-01T15:11:28.000Z</updated>
+  <updated>2021-07-04T16:00:00.000Z</updated>
   <id>https://ushell.me/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>业务缓存的一致性</title>
+    <link href="https://ushell.me/2021/07/05/%E4%B8%9A%E5%8A%A1%E7%BC%93%E5%AD%98%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/"/>
+    <id>https://ushell.me/2021/07/05/业务缓存的一致性/</id>
+    <published>2021-07-04T16:00:00.000Z</published>
+    <updated>2021-07-04T16:00:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;缓存在业务场景中多用于存储数据，避免频繁调用后端数据库服务，减轻数据库压力，提高业务吞吐量；本文是笔者翻译的一篇关于如何保证在业务缓存数据的一致性&lt;/p&gt;
+&lt;p&gt;—-译文—-&lt;/p&gt;
+&lt;p&gt;今日Redis已经成为互联网行业最受欢迎的缓存解决方案。尽管关系型数据库系统（SQL
+      
+    
+    </summary>
+    
+      <category term="翻译" scheme="https://ushell.me/categories/%E7%BF%BB%E8%AF%91/"/>
+    
+    
+      <category term="cache" scheme="https://ushell.me/tags/cache/"/>
+    
+      <category term="Redis" scheme="https://ushell.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hyperf框架组件crontab分析</title>
     <link href="https://ushell.me/2021/04/01/hyperf%E6%A1%86%E6%9E%B6%E7%BB%84%E4%BB%B6crontab%E5%88%86%E6%9E%90/"/>
     <id>https://ushell.me/2021/04/01/hyperf框架组件crontab分析/</id>
-    <published>2021-04-01T15:11:28.000Z</published>
-    <updated>2021-04-01T15:11:28.000Z</updated>
+    <published>2021-03-31T16:00:00.000Z</published>
+    <updated>2021-03-31T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -47,8 +74,8 @@
     <title>k8s容器参数containerPort解析</title>
     <link href="https://ushell.me/2021/03/31/k8s%E5%AE%B9%E5%99%A8%E5%8F%82%E6%95%B0containerPort%E8%A7%A3%E6%9E%90/"/>
     <id>https://ushell.me/2021/03/31/k8s容器参数containerPort解析/</id>
-    <published>2021-03-31T15:33:22.000Z</published>
-    <updated>2021-03-31T15:33:22.000Z</updated>
+    <published>2021-03-30T16:00:00.000Z</published>
+    <updated>2021-03-30T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -70,8 +97,8 @@
     <title>synergy多主机共享键鼠</title>
     <link href="https://ushell.me/2021/01/17/synergy%E5%A4%9A%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E9%94%AE%E9%BC%A0/"/>
     <id>https://ushell.me/2021/01/17/synergy多主机共享键鼠/</id>
-    <published>2021-01-17T07:36:12.000Z</published>
-    <updated>2021-01-17T07:36:12.000Z</updated>
+    <published>2021-01-16T16:00:00.000Z</published>
+    <updated>2021-01-16T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -274,8 +301,8 @@
     <title>PHP本地开发环境浅析</title>
     <link href="https://ushell.me/2019/07/07/PHP%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%B5%85%E6%9E%90/"/>
     <id>https://ushell.me/2019/07/07/PHP本地开发环境浅析/</id>
-    <published>2019-07-07T08:58:36.000Z</published>
-    <updated>2019-07-07T08:58:36.000Z</updated>
+    <published>2019-07-06T16:00:00.000Z</published>
+    <updated>2019-07-06T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -299,8 +326,8 @@
     <title>composer加速</title>
     <link href="https://ushell.me/2019/07/07/composer%E5%8A%A0%E9%80%9F/"/>
     <id>https://ushell.me/2019/07/07/composer加速/</id>
-    <published>2019-07-07T08:00:51.000Z</published>
-    <updated>2019-07-07T08:00:51.000Z</updated>
+    <published>2019-07-06T16:00:00.000Z</published>
+    <updated>2019-07-06T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -353,8 +380,8 @@
     <title>microtime毫秒时间戳陷阱</title>
     <link href="https://ushell.me/2019/05/30/microtime%E6%AF%AB%E7%A7%92%E6%97%B6%E9%97%B4%E6%88%B3%E9%99%B7%E9%98%B1/"/>
     <id>https://ushell.me/2019/05/30/microtime毫秒时间戳陷阱/</id>
-    <published>2019-05-30T06:48:48.000Z</published>
-    <updated>2019-05-30T06:48:48.000Z</updated>
+    <published>2019-05-29T16:00:00.000Z</published>
+    <updated>2019-05-29T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -376,8 +403,8 @@
     <title>Gitlab配置CAS认证</title>
     <link href="https://ushell.me/2019/05/26/Gitlab%E9%85%8D%E7%BD%AECAS%E8%AE%A4%E8%AF%81/"/>
     <id>https://ushell.me/2019/05/26/Gitlab配置CAS认证/</id>
-    <published>2019-05-25T16:00:36.000Z</published>
-    <updated>2019-05-25T16:00:36.000Z</updated>
+    <published>2019-05-25T16:00:00.000Z</published>
+    <updated>2019-05-25T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -403,8 +430,8 @@
     <title>CAS协议</title>
     <link href="https://ushell.me/2019/05/25/CAS%E5%8D%8F%E8%AE%AE/"/>
     <id>https://ushell.me/2019/05/25/CAS协议/</id>
-    <published>2019-05-25T11:41:19.000Z</published>
-    <updated>2019-05-25T11:41:19.000Z</updated>
+    <published>2019-05-24T16:00:00.000Z</published>
+    <updated>2019-05-24T16:00:00.000Z</updated>
     
     <summary type="html">
     
@@ -429,8 +456,8 @@
     <title>How SQLi ATTACK</title>
     <link href="https://ushell.me/2018/01/21/How-SQLi-ATTACK/"/>
     <id>https://ushell.me/2018/01/21/How-SQLi-ATTACK/</id>
-    <published>2018-01-21T08:31:18.000Z</published>
-    <updated>2018-01-21T08:31:18.000Z</updated>
+    <published>2018-01-20T16:00:00.000Z</published>
+    <updated>2018-01-20T16:00:00.000Z</updated>
     
     <summary type="html">
     
