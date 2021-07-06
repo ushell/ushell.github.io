@@ -386,12 +386,12 @@
 <h3 id="Read-Through"><a href="#Read-Through" class="headerlink" title="Read Through"></a>Read Through</h3><ul>
 <li><p>不可变操作（read）</p>
 <ul>
-<li>客户端从缓存中读取数据，任何一个缓存命中或未命中都会返回到客户端；如果缓存未命中，自动从数据库中获取数据</li>
+<li>客户端从缓存中读取数据，任何一个缓存命中或未命中都会返回到客户端；如果缓存未命中，Redis自动从数据库中获取数据</li>
 </ul>
 </li>
 <li><p>可变操作（create,update,delete）</p>
 <ul>
-<li>这种策略不会任何操作，会在<code>wirte through</code>和<code>write behind</code>模式操作</li>
+<li>这种策略操作，会在<code>wirte through</code>和<code>write behind</code>模式操作</li>
 </ul>
 </li>
 </ul>
@@ -399,23 +399,23 @@
 <h3 id="Write-Through"><a href="#Write-Through" class="headerlink" title="Write Through"></a>Write Through</h3><ul>
 <li><p>不可变操作（read）</p>
 <ul>
-<li>这种模式不会操作，会在<code>read through</code>模式中操作</li>
+<li>这种模式和<code>read through</code>模式中操作一致</li>
 </ul>
 </li>
 <li><p>可变操作（create,update,delete）</p>
 <ul>
-<li>客户端需要在Redis中执行<code>create,update,delete</code>操作，缓存层会自动将数据同步到MySQL数据库中</li>
+<li>客户端需要在Redis中执行<code>create,update,delete</code>操作，Redis会通过原子性操作数据同步到MySQL数据库</li>
 </ul>
 </li>
 </ul>
 <p><code>write through</code>模式的缺陷更加明显，大部分缓存层都不支持这种操作。Redis是被设计成缓存服务，在同步数据到MySQL过程会存在数据丢失。即使Redis支持持久化如<code>RDB</code>和<code>AOF</code>, 也不推荐这种同步数据方案</p>
 <h3 id="Write-Behind"><a href="#Write-Behind" class="headerlink" title="Write Behind"></a>Write Behind</h3><ul>
 <li>不可变操作（read）<ul>
-<li>这种模式不会操作，会在<code>read through</code>模式中操作</li>
+<li>这种模式和<code>read through</code>模式中操作一致</li>
 </ul>
 </li>
 <li>可变操作（create,update,delete）<ul>
-<li>客户端需要在Redis中执行<code>create,update,delete</code>操作，缓存层会保存数据到消息队列中后直接返回给客户端；通过消息队列保存数据到MySQL</li>
+<li>客户端需要在Redis中执行<code>create,update,delete</code>操作，Redis会保存数据到消息队列中后直接返回给客户端；通过消息队列更新数据到MySQL</li>
 </ul>
 </li>
 </ul>
@@ -438,6 +438,7 @@
 <p>这种方法合并了原生<code>cache aside</code>算法和场景一。是针对<code>cache aside</code>算法的改进。在常规场景中能保证数据的最终一致性。</p>
 <p>通过暂停进程500ms操作，这个算法假设所以并发读取进程已经保存Redis中的旧值，第二次删除操作会避免脏数据的发生。尽管一些特殊情况会打破数据的最终一致性，但这种情况是微不足道的。</p>
 <h3 id="Write-Behind场景"><a href="#Write-Behind场景" class="headerlink" title="Write Behind场景"></a>Write Behind场景</h3><p>最后，我们提到一个新颖的技术方案如阿里云开发的<code>canal</code>（该项目提供主从模式同步MySQL数据到其他系统）。这种方案可以实现<code>write behind</code>算法，然后需要从其他系统执行复制操作。相比Redis和MySQL之间的数据复制，阿里的这个方案是通过订阅binlog的方式复制数据到Redis，这种方案可以提供更好的可靠性和一致性。binlog是RDMS系统中的一部分，我们可以假设这种方案在灾难环境也是可靠的和具备弹性。这种成熟的架构方案是用来MySQL主从模式的数据复制。</p>
+<p>译注：<code>write behind</code>场景需要扩展缓存层功能实现上述算法。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>上述讨论的大部分方法可以保证数据的强一致性，但是强一致性方案在Redis和MySQL之间是不现实的。我们通过实现<code>ACID</code>方案保证数据的强一致性。这样做会降低缓存层的性能，这将违背我们使用Redis缓存的目标。</p>
 <p>然而所有的方法都尝试达到最终一致性，可能<code>write behind</code>方案（配合<code>canal</code>）是最好的。上面算法是对其他的一些算法改进。为了描述它们的层次结构，绘制了以下树状图。在图中，每个节点通常会比其子节点实现更好的一致性。</p>
 <p><img src="/images/redis_mysql_hierarchy.png" class="lazyload" data-srcset="/images/redis_mysql_hierarchy.png" srcset="data:image/png;base64,666" alt="图二"></p>
