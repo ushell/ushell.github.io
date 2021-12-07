@@ -311,11 +311,11 @@
 
 
   
-  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务的时发现使用单点的etcd服务，需要扩容保证etcd服务的高可用性。
-etcd数据迁移方案根据是否处于容器环境有所不同，这里记录一下kubernets环境中数据迁移扩容。</code></pre>
-<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><pre><code>etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peerurl地址等信息，会导致复制启动后etcd集群异常。
-主要迁移思路采用新建3节点的集群，通过snapshot方式备份旧服务的数据方式，在新集群每一个节点进行restore操作。需要注意的是执行restore命令时，参数中要带`--initial-cluster`和`--initial-advertise-peer-urls`参数，否则集群启动时无法相互同步。
-如果etcd的镜像采用的是`bitnami/etcd`, restore后的`data-dir`目录需要保持一致;并且需要注意该镜像中的数据目录权限是`1001:root`权限。</code></pre>
+  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务的时发现使用单点的etcd服务，需要扩容保证etcd服务的高可用性。</p>
+<p>etcd数据迁移方案根据是否处于容器环境有所不同，这里记录一下kubernets环境中数据迁移扩容。</p>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><p>etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peerurl地址等信息，会导致复制启动后etcd集群异常。</p>
+<p>主要迁移思路采用新建3节点的集群，通过snapshot方式备份旧服务的数据方式，在新集群每一个节点进行restore操作。需要注意的是执行restore命令时，参数中要带<code>--initial-cluster</code>和<code>--initial-advertise-peer-urls</code>参数，否则集群启动时无法相互同步。</p>
+<p>如果etcd的镜像采用的是<code>bitnami/etcd</code>, restore后的<code>data-dir</code>目录需要保持一致;并且需要注意该镜像中的数据目录权限是<code>1001:root</code>权限。</p>
 <p>操作步骤:<br>1、新建集群（三节点）</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install etcd bitnami/etcd --<span class="builtin-name">set</span> <span class="string">&#x27;replicaCount=3&#x27;</span></span><br></pre></td></tr></table></figure>
 

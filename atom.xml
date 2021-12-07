@@ -27,7 +27,7 @@
     
       
       
-        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务
       
     
     </summary>
