@@ -327,7 +327,7 @@
 <p>旧服务的数据已经迁移etcd集群各节点的pvc中，需要关闭etcd集群服务重启</p>
 <p>4、重启etcd集群服务</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall etcd</span><br><span class="line">helm install etcd bitnami/etcd --<span class="builtin-name">set</span> <span class="string">&#x27;replicaCount=3&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>需要注意的是<code>bitnami/etcd</code>镜像中数据目录通过环境变量<code>ETCD_DATA_DIR</code>配置，在实践过程中貌似没有生效；如果该配置项不生效则采用busybox挂载pvc的方式修改etcd数据目录<code>/bitnami/etcd/data</code></p>
+<p>需要注意的是<code>bitnami/etcd</code>镜像中数据目录通过环境变量<code>ETCD_DATA_DIR</code>配置；如果该配置项不生效则采用busybox挂载pvc的方式修改etcd数据目录<code>/bitnami/etcd/data</code></p>
 <p>5、迁移完成验证数据</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">etcdctl get / <span class="params">--prefix</span> <span class="params">--endpoints</span> http:<span class="string">//POD_IP</span><span class="function">:2379</span></span><br></pre></td></tr></table></figure>
 
