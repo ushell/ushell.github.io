@@ -21,7 +21,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：spiped - 闲谈</title>
+  <title>标签：etcd - 闲谈</title>
   
 
   
@@ -276,16 +276,17 @@
   
     
     <h2 class="article-title" >
-      <a href="/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/">
-        使用TLS加密通信数据
+      <a href="/2021/12/07/etcd%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
+        etcd数据迁移
       </a>
     </h2>
   
   <div class='md'>
     
       
-        随着某些业务安全性要求提高，敏感数据经过网络时需要加密传输。如MySQL, Redis这些协议在网络中传输是可以通过抓包分析到数据包内部信息的。
-本文只是简单记录使用TLS加密某些软件数据流使用，本质上无论spiped还是stunnel都是通过建立隧道的方式进行安全传输。spiped是Redis官方推荐一个采用AES加密算法开源工具，该工具作者是OpenBSD的安全协会成员；stunnel则...
+        背景etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务的时发现使用单点的etcd服务，需要扩容保证etcd服务的高可用性。
+etcd数据迁移方案根据是否处于容器环境有所不同，这里记录一下kubernets环境中数据迁移扩容。
+迁移etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peer...
       
     
   </div>
@@ -293,15 +294,15 @@
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2019-08-23</time>
+        <time>2021-12-07</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
+          <a class="category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/'>
+          <a class='readmore' href='/2021/12/07/etcd%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/'>
             阅读全文
           </a>
         </div>

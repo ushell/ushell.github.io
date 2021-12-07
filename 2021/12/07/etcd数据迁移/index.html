@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -21,7 +19,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：spiped - 闲谈</title>
+  <title>etcd数据迁移 - 闲谈</title>
+  
+    <meta name="keywords" content="etcd">
   
 
   
@@ -213,7 +213,7 @@
     <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -252,77 +252,203 @@
       <div class='body-wrapper' id="pjax-container">
         
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        etcd数据迁移
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/">
-        使用TLS加密通信数据
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        随着某些业务安全性要求提高，敏感数据经过网络时需要加密传输。如MySQL, Redis这些协议在网络中传输是可以通过抓包分析到数据包内部信息的。
-本文只是简单记录使用TLS加密某些软件数据流使用，本质上无论spiped还是stunnel都是通过建立隧道的方式进行安全传输。spiped是Redis官方推荐一个采用AES加密算法开源工具，该工具作者是OpenBSD的安全协会成员；stunnel则...
-      
-    
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2019-08-23</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年12月7日</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/network/">network</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="etcd数据迁移" data-path="/2021/12/07/etcd%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务的时发现使用单点的etcd服务，需要扩容保证etcd服务的高可用性。
+etcd数据迁移方案根据是否处于容器环境有所不同，这里记录一下kubernets环境中数据迁移扩容。</code></pre>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><pre><code>etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peerurl地址等信息，会导致复制启动后etcd集群异常。
+主要迁移思路采用新建3节点的集群，通过snapshot方式备份旧服务的数据方式，在新集群每一个节点进行restore操作。需要注意的是执行restore命令时，参数中要带`--initial-cluster`和`--initial-advertise-peer-urls`参数，否则集群启动时无法相互同步。
+如果etcd的镜像采用的是`bitnami/etcd`, restore后的`data-dir`目录需要保持一致;并且需要注意该镜像中的数据目录权限是`1001:root`权限。</code></pre>
+<p>操作步骤:<br>1、新建集群（三节点）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install etcd bitnami/etcd --<span class="builtin-name">set</span> <span class="string">&#x27;replicaCount=3&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、旧服务备份数据库</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">etdctl snapshot save <span class="regexp">/tmp/my</span>.db --endpoints http:<span class="regexp">//</span>POD_IP:<span class="number">2379</span></span><br></pre></td></tr></table></figure>
+
+<p>3、复制数据库文件到新集群每一个节点，执行restore操作</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 复制文件操作</span><br><span class="line"><span class="regexp">//</span> 省略...</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 节点<span class="number">1</span></span><br><span class="line">etcdctl snapshot restore my.db --name etcd-<span class="number">0</span> \</span><br><span class="line">  --initial-cluster etcd-<span class="number">0</span>=http:<span class="regexp">//</span>etcd-<span class="number">0</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">1</span>=http:<span class="regexp">//</span>etcd-<span class="number">1</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">2</span>=http:<span class="regexp">//</span>etcd-<span class="number">2</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --initial-advertise-peer-urls http:<span class="regexp">//</span>etcd-<span class="number">0</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --skip-hash-check=true \</span><br><span class="line">  --data-dir=<span class="regexp">/bitnami/</span>etcd/store</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 节点<span class="number">2</span></span><br><span class="line">etcdctl snapshot restore my.db --name etcd-<span class="number">1</span> \</span><br><span class="line">  --initial-cluster etcd-<span class="number">0</span>=http:<span class="regexp">//</span>etcd-<span class="number">0</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">1</span>=http:<span class="regexp">//</span>etcd-<span class="number">1</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">2</span>=http:<span class="regexp">//</span>etcd-<span class="number">2</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --initial-advertise-peer-urls http:<span class="regexp">//</span>etcd-<span class="number">1</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --skip-hash-check=true \</span><br><span class="line">  --data-dir=<span class="regexp">/bitnami/</span>etcd/store</span><br><span class="line">  </span><br><span class="line"><span class="regexp">//</span> 节点<span class="number">3</span></span><br><span class="line">etcdctl snapshot restore my.db --name etcd-<span class="number">2</span> \</span><br><span class="line">  --initial-cluster etcd-<span class="number">0</span>=http:<span class="regexp">//</span>etcd-<span class="number">0</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">1</span>=http:<span class="regexp">//</span>etcd-<span class="number">1</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span>,etcd-<span class="number">2</span>=http:<span class="regexp">//</span>etcd-<span class="number">2</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --initial-advertise-peer-urls http:<span class="regexp">//</span>etcd-<span class="number">2</span>.etcd-headless.etcd.svc.cluster.local:<span class="number">2380</span> \</span><br><span class="line">  --skip-hash-check=true \</span><br><span class="line">  --data-dir=<span class="regexp">/bitnami/</span>etcd/store</span><br></pre></td></tr></table></figure>
+<p>旧服务的数据已经迁移etcd集群各节点的pvc中，需要关闭etcd集群服务重启</p>
+<p>4、重启etcd集群服务</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall etcd</span><br><span class="line">helm install etcd bitnami/etcd --<span class="builtin-name">set</span> <span class="string">&#x27;replicaCount=3&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是<code>bitnami/etcd</code>镜像中数据目录通过环境变量<code>ETCD_DATA_DIR</code>配置，在实践过程中貌似没有生效；如果该配置项不生效则采用busybox挂载pvc的方式修改etcd数据目录<code>/bitnami/etcd/data</code></p>
+<p>5、迁移完成验证数据</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">etcdctl get / <span class="params">--prefix</span> <span class="params">--endpoints</span> http:<span class="string">//POD_IP</span><span class="function">:2379</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/op-guide/recovery">https://etcd.io/docs/v3.5/op-guide/recovery</a></li>
+<li><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls">https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls</a></li>
+</ul>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2019/08/23/%E4%BD%BF%E7%94%A8TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE/'>
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://ushell.me/2021/12/07/etcd%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/>https://ushell.me/2021/12/07/etcd%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-12-07T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年12月7日</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/etcd/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>etcd</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/07/06/crontab%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/'>
+          <p class='title'>crontab源码解析<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>背景分析Linux环境中cron源码逻辑，了解定时任务实现原理。
+基于busybox版本crontab
+
+参考
+crontab源码
+
+</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -330,170 +456,28 @@
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">闲谈</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/c29lYXN5ZEBnbWFpbC5jb20="
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/ushell"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/ushell"
-              class="social fab fa-twitter flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/devops/" href="/categories/devops/"
-            id="categoriesdevops"
-            ><div class='name'>devops</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/docker/" href="/categories/docker/"
-            id="categoriesdocker"
-            ><div class='name'>docker</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/framework/" href="/categories/framework/"
-            id="categoriesframework"
-            ><div class='name'>framework</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/kubernetes/" href="/categories/kubernetes/"
-            id="categorieskubernetes"
-            ><div class='name'>kubernetes</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/network/" href="/categories/network/"
-            id="categoriesnetwork"
-            ><div class='name'>network</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/php/" href="/categories/php/"
-            id="categoriesphp"
-            ><div class='name'>php</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/protocol/" href="/categories/protocol/"
-            id="categoriesprotocol"
-            ><div class='name'>protocol</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/security/" href="/categories/security/"
-            id="categoriessecurity"
-            ><div class='name'>security</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/tools/" href="/categories/tools/"
-            id="categoriestools"
-            ><div class='name'>tools</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"
-            id="categoriesE58886E5B883E5BC8F"
-            ><div class='name'>分布式</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%BF%BB%E8%AF%91/" href="/categories/%E7%BF%BB%E8%AF%91/"
-            id="categoriesE7BFBBE8AF91"
-            ><div class='name'>翻译</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB"><span class="toc-text">迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/cache/" style="font-size: 14px; color: #999">cache</a> <a href="/tags/cas/" style="font-size: 19px; color: #777">cas</a> <a href="/tags/composer/" style="font-size: 14px; color: #999">composer</a> <a href="/tags/composer2/" style="font-size: 14px; color: #999">composer2</a> <a href="/tags/crontab/" style="font-size: 24px; color: #555">crontab</a> <a href="/tags/debian/" style="font-size: 14px; color: #999">debian</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/etcd/" style="font-size: 14px; color: #999">etcd</a> <a href="/tags/ffi/" style="font-size: 14px; color: #999">ffi</a> <a href="/tags/gitlab/" style="font-size: 14px; color: #999">gitlab</a> <a href="/tags/hammerspoon/" style="font-size: 14px; color: #999">hammerspoon</a> <a href="/tags/hyperf/" style="font-size: 14px; color: #999">hyperf</a> <a href="/tags/jwt/" style="font-size: 14px; color: #999">jwt</a> <a href="/tags/kubernetes/" style="font-size: 14px; color: #999">kubernetes</a> <a href="/tags/laradock/" style="font-size: 14px; color: #999">laradock</a> <a href="/tags/laravel/" style="font-size: 14px; color: #999">laravel</a> <a href="/tags/laravel-permission/" style="font-size: 14px; color: #999">laravel-permission</a> <a href="/tags/ldap/" style="font-size: 14px; color: #999">ldap</a> <a href="/tags/microtime/" style="font-size: 14px; color: #999">microtime</a> <a href="/tags/outline/" style="font-size: 14px; color: #999">outline</a> <a href="/tags/php/" style="font-size: 14px; color: #999">php</a> <a href="/tags/phpbrew/" style="font-size: 14px; color: #999">phpbrew</a> <a href="/tags/prestissimo/" style="font-size: 14px; color: #999">prestissimo</a> <a href="/tags/spipe/" style="font-size: 14px; color: #999">spipe</a> <a href="/tags/spiped/" style="font-size: 14px; color: #999">spiped</a> <a href="/tags/sqli/" style="font-size: 14px; color: #999">sqli</a> <a href="/tags/sso/" style="font-size: 19px; color: #777">sso</a> <a href="/tags/ssr/" style="font-size: 14px; color: #999">ssr</a> <a href="/tags/stunnel/" style="font-size: 14px; color: #999">stunnel</a> <a href="/tags/synergy/" style="font-size: 14px; color: #999">synergy</a> <a href="/tags/tls/" style="font-size: 19px; color: #777">tls</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%AE%E9%BC%A0/" style="font-size: 14px; color: #999">共享键鼠</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 14px; color: #999">自动化</a> <a href="/tags/%E9%85%B8%E9%85%B8%E4%B9%B3/" style="font-size: 14px; color: #999">酸酸乳</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
         
@@ -503,8 +487,8 @@
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="etcd数据迁移";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
 
