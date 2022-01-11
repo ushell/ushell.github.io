@@ -320,15 +320,7 @@
 
 
 <p>如果etcd的镜像采用的是<code>bitnami/etcd</code>, restore后的<code>data-dir</code>目录需要保持一致；并且需要注意该镜像中的数据目录权限是<code>1001:root</code>权限。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考：https:<span class="regexp">//gi</span>thub.com<span class="regexp">/bitnami/</span>bitnami-docker-etcd<span class="comment">#3410-debian-10-r0</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>如果kubernets部署环境是<code>aliyun</code>，需要使用pvc时，storageClass类型至少选择<code>alicloud-disk-ssd</code>;etcd在请求量增多时会导致IO的延迟增高，一定几率出现<code>request took too long</code>错误。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考：https:<span class="regexp">//gi</span>thub.com<span class="regexp">/kubernetes/</span>kubernetes<span class="regexp">/issues/</span><span class="number">70082</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>操作步骤:<br>1、新建集群（三节点）</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install etcd bitnami/etcd --<span class="builtin-name">set</span> <span class="string">&#x27;replicaCount=3&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -357,8 +349,14 @@
 </li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/op-guide/recovery">https://etcd.io/docs/v3.5/op-guide/recovery</a></li>
-<li><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls">https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls</a></li>
+<li><p><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/op-guide/recovery">https://etcd.io/docs/v3.5/op-guide/recovery</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls">https://etcd.io/docs/v3.5/faq/#what-is-the-difference-between-listen-clientpeer-urls-advertise-client-urls-or-initial-advertise-peer-urls</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/bitnami/bitnami-docker-etcd#3410-debian-10-r0">https://github.com/bitnami/bitnami-docker-etcd#3410-debian-10-r0</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes/kubernetes/issues/70082">https://github.com/kubernetes/kubernetes/issues/70082</a></p>
+</li>
 </ul>
 
   
