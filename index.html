@@ -326,9 +326,9 @@
   <div class='md'>
     
       
-        背景etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案；同类型的还有consul等。在改造某个业务的时发现使用单点的etcd服务，需要扩容保证etcd服务的高可用性。
+        背景etcd是目前比较流行的分布式kv存储解决方案，其中kubernets采用etcd作为其存储方案。某个业务使用单点的etcd服务，需要扩容保证etcd服务的高可用性。
 etcd数据迁移方案根据是否处于容器环境有所不同，这里记录一下kubernets环境中数据迁移扩容。
-迁移etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peer...
+迁移etcd数据迁移不能简单的采用打包db目录的方式，db文件中包含了peerurl地址等信息，会导致复制启动后etcd...
       
     
   </div>
